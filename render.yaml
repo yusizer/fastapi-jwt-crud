@@ -1,0 +1,27 @@
+# Render Blueprint — one-click deploy.
+# Go to https://dashboard.render.com/blueprints and select this repo.
+services:
+  - type: web
+    name: fastapi-jwt-crud
+    runtime: python
+    plan: free
+    region: frankfurt  # EU; change to oregon if you prefer US
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m app
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      # Auto-generate a strong JWT secret on first deploy.
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "30"
+      - key: REFRESH_TOKEN_EXPIRE_DAYS
+        value: "7"
+      # SQLite (ephemeral on free plan — resets on redeploy, fine for a demo).
+      - key: DATABASE_URL
+        value: sqlite+aiosqlite:///./app.db
+      - key: WEB_HOST
+        value: 0.0.0.0
