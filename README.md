@@ -1,5 +1,8 @@
 # FastAPI JWT CRUD API 🔐
 
+![CI](https://github.com/yusizer/fastapi-jwt-crud/actions/workflows/ci.yml/badge.svg)
+**Live demo:** https://fastapi-jwt-crud.onrender.com/docs (Swagger UI)
+
 A production-style REST API: **JWT authentication** (register, login, refresh) and
 **full CRUD for posts** with owner-only update/delete. Auto-generated **Swagger UI**
 as the live demo. PostgreSQL-ready, Dockerized, tested.
